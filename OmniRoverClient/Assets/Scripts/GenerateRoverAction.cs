@@ -12,44 +12,44 @@ public static class GenerateRoverAction
         Three
     }
 
-    public static void MoveNorth(float time)
+    public static void MoveForward(float time)
     {
-        CreateAction("move_north", time);
+        CreateAction("move_forward", time);
     }
 
-    public static void MoveSouth(float time)
+    public static void MoveBackward(float time)
     {
-        CreateAction("move_south", time);
+        CreateAction("move_backward", time);
     }
 
-    public static void MoveEast(float time)
+    public static void MoveRight(float time)
     {
-        CreateAction("move_east", time);
+        CreateAction("move_right", time);
     }
 
-    public static void MoveWest(float time)
+    public static void MoveLeft(float time)
     {
-        CreateAction("move_west", time);
+        CreateAction("move_left", time);
     }
 
-    public static void MoveNorthEast(float time)
+    public static void MoveForwardRight(float time)
     {
-        CreateAction("move_northeast", time);
+        CreateAction("move_forwardright", time);
     }
 
-    public static void MoveNorthWest(float time)
+    public static void MoveForwardLeft(float time)
     {
-        CreateAction("move_northwest", time);
+        CreateAction("move_forwardleft", time);
     }
 
-    public static void MoveSouthEast(float time)
+    public static void MoveBackwardRight(float time)
     {
-        CreateAction("move_southeast", time);
+        CreateAction("move_backwardright", time);
     }
 
-    public static void MoveSouthWest(float time)
+    public static void MoveBackwardLeft(float time)
     {
-        CreateAction("move_southwest", time);
+        CreateAction("move_backwardleft", time);
     }
 
     public static void RotateRight(float time)

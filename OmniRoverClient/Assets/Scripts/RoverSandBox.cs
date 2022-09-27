@@ -15,16 +15,16 @@ public class RoverSandBox : MonoBehaviour
     public void MoveRover()
     {
         SetSpeed(SpeedLevel.Two);
-        MoveNorth(1f);
-        MoveSouth(1f);
-        MoveEast(1f);
-        MoveWest(1f);
+        MoveForward(1f);
+        MoveBackward(1f);
+        MoveRight(1f);
+        MoveLeft(1f);
         //SetSpeed(SpeedLevel.One);
-        MoveNorthEast(1f);
-        MoveNorthWest(1f);
+        MoveForwardRight(1f);
+        MoveForwardLeft(1f);
         //SetSpeed(SpeedLevel.Two);
-        MoveSouthEast(1f);
-        MoveSouthWest(1f);
+        MoveBackwardRight(1f);
+        MoveBackwardLeft(1f);
         //SetSpeed(SpeedLevel.Three);
         RotateLeft(0.5f);
         RotateRight(0.5f);
