@@ -8,6 +8,8 @@ public class RoverPathPreview : MonoBehaviour
 {
     public Transform rover;
 
+    private Vector3 originalPosition;
+
     [SerializeField]
     private float speedLevel1 = 1;
     [SerializeField]
@@ -17,27 +19,40 @@ public class RoverPathPreview : MonoBehaviour
 
     private Dictionary<string, Func<float, IEnumerator>> dispatch = new Dictionary<string, Func<float, IEnumerator>>();
     private float currentSpeed;
+
+    private Coroutine previewPathCoroutine;
     public void Start()
     {
-        dispatch.Add("move_north", MoveNorth);
-        dispatch.Add("move_south", MoveSouth);
-        dispatch.Add("move_east", MoveEast);
-        dispatch.Add("move_west", MoveWest);
-        dispatch.Add("move_northeast", MoveNorthEast);
-        dispatch.Add("move_northwest", MoveNorthWest);
-        dispatch.Add("move_southeast", MoveSouthEast);
-        dispatch.Add("move_southwest", MoveSouthWest);
+        originalPosition = rover.position;
+
+        dispatch.Add("move_forward", MoveNorth);
+        dispatch.Add("move_backward", MoveSouth);
+        dispatch.Add("move_right", MoveEast);
+        dispatch.Add("move_left", MoveWest);
+        dispatch.Add("move_forwardright", MoveNorthEast);
+        dispatch.Add("move_forwardleft", MoveNorthWest);
+        dispatch.Add("move_backwardright", MoveSouthEast);
+        dispatch.Add("move_backwardleft", MoveSouthWest);
         dispatch.Add("rotate_left", RotateLeft);
         dispatch.Add("rotate_right", RotateRight);
         dispatch.Add("set_speed", SetSpeed);
-
+        dispatch.Add("stop", StopRover);
         currentSpeed = speedLevel1;
     }
+
+    public void StopRoverPreview()
+    {
+        if (previewPathCoroutine != null) StopCoroutine(previewPathCoroutine);
+    }
+
     public void PreviewPath()
     {
         string json = JsonUtility.ToJson(GenerateRoverAction.actionList);
         RoverActionList actionList = JsonUtility.FromJson<RoverActionList>(json);
-        StartCoroutine(StartPath(actionList));
+
+        rover.position = originalPosition;
+        if (previewPathCoroutine != null) StopCoroutine(previewPathCoroutine);
+        previewPathCoroutine = StartCoroutine(StartPath(actionList));
     }
 
     private IEnumerator StartPath(RoverActionList actionList)
@@ -47,6 +62,15 @@ public class RoverPathPreview : MonoBehaviour
             yield return dispatch[roverAction.action](roverAction.value);
         }
     }
+    
+    private IEnumerator StopRover(float time)
+    {
+        yield return Countdown(time, () =>
+        {
+            // No action for {time} seconds
+        });
+    }
+
     private IEnumerator MoveNorth(float time)
     {
 

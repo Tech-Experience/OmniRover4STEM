@@ -72,6 +72,11 @@ public static class GenerateRoverAction
         CreateAction("set_speed", speedLevel);
     }
 
+    public static void Stop(float time)
+    {
+        CreateAction("stop", time);
+    }
+
     private static void CreateAction(string action, float value)
     {
         RoverAction roverAction = new RoverAction() { action = action, value = value };
