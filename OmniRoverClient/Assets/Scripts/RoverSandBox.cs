@@ -12,7 +12,7 @@ public class RoverSandBox : MonoBehaviour
     }
     
 
-    public void MoveRover()
+    public void MoveRoverTest()
     {
         SetSpeed(SpeedLevel.Two);
         MoveForward(1f);
@@ -29,5 +29,17 @@ public class RoverSandBox : MonoBehaviour
         RotateLeft(0.5f);
         RotateRight(0.5f);
 
+    }
+
+    private void MoveRover()
+    {
+        RotateLeft(0.5f);
+        MoveForward(0.75f);
+        RotateRight(0.5f);
+        MoveForward(1.0f);
+        RotateRight(0.35f);
+        MoveForward(1f);
+        RotateLeft(0.35f);
+        MoveForward(3f);
     }
 }
