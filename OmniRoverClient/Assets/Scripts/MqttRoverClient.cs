@@ -12,12 +12,15 @@ public class MqttRoverClient : M2MqttUnityClient
         get => publishTopic;
     }
 
+    private Coroutine publishActionListFineCoroutine;
     public void PublishRoverActionList()
     {
         string payload = JsonUtility.ToJson(GenerateRoverAction.actionList);
         client.Publish(publishTopic, System.Text.Encoding.UTF8.GetBytes(payload));
         Debug.Log("Rover Action published");
         Debug.Log($"payload published : {payload}");
+        //if (publishActionListFineCoroutine != null) StopCoroutine(publishActionListFineCoroutine);
+        //publishActionListFineCoroutine = StartCoroutine(PublishRoverActionListFine(GenerateRoverAction.actionList));
     }
 
 
@@ -28,8 +31,40 @@ public class MqttRoverClient : M2MqttUnityClient
         actionList.actions.Add(stopAction);
 
         string payload = JsonUtility.ToJson(actionList);
-        client.Publish(publishTopic, System.Text.Encoding.UTF8.GetBytes(payload));
-        Debug.Log("Rover Stop Action published");
+
+        if (publishActionListFineCoroutine != null) StopCoroutine(publishActionListFineCoroutine);
+        PublishPayload(payload, publishTopic);
+
+
+        //client.Publish(publishTopic, System.Text.Encoding.UTF8.GetBytes(payload));
+        //Debug.Log("Rover Stop Action published");
+        //Debug.Log($"payload published : {payload}");
+    }
+
+    private IEnumerator PublishRoverActionListFine(RoverActionList actionList)
+    {
+        List<RoverAction> roverActionList = actionList.actions;
+        List<RoverActionList> fineActionList = new List<RoverActionList>();
+        foreach(RoverAction action in roverActionList)
+        {
+            RoverActionList newActionList = new RoverActionList();
+            newActionList.actions.Add(action);
+            fineActionList.Add(newActionList);
+        }
+
+        foreach(RoverActionList list in fineActionList)
+        {
+            string payload = JsonUtility.ToJson(list);
+            PublishPayload(payload, publishTopic);
+            if (list.actions[0].action == "set_speed") continue;
+            yield return new WaitForSeconds(list.actions[0].value);
+        }
+    }
+
+    private void PublishPayload(string payload, string topic)
+    {
+        client.Publish(topic, System.Text.Encoding.UTF8.GetBytes(payload));
+        Debug.Log("Rover Action published");
         Debug.Log($"payload published : {payload}");
     }
 }
