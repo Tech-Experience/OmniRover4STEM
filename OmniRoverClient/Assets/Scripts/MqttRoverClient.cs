@@ -15,12 +15,8 @@ public class MqttRoverClient : M2MqttUnityClient
     private Coroutine publishActionListFineCoroutine;
     public void PublishRoverActionList()
     {
-        string payload = JsonUtility.ToJson(GenerateRoverAction.actionList);
-        client.Publish(publishTopic, System.Text.Encoding.UTF8.GetBytes(payload));
-        Debug.Log("Rover Action published");
-        Debug.Log($"payload published : {payload}");
-        //if (publishActionListFineCoroutine != null) StopCoroutine(publishActionListFineCoroutine);
-        //publishActionListFineCoroutine = StartCoroutine(PublishRoverActionListFine(GenerateRoverAction.actionList));
+        //PublishRoverActionListAll();
+        PublishRoverActionFine();
     }
 
 
@@ -34,13 +30,30 @@ public class MqttRoverClient : M2MqttUnityClient
 
         if (publishActionListFineCoroutine != null) StopCoroutine(publishActionListFineCoroutine);
         PublishPayload(payload, publishTopic);
-
-
-        //client.Publish(publishTopic, System.Text.Encoding.UTF8.GetBytes(payload));
-        //Debug.Log("Rover Stop Action published");
-        //Debug.Log($"payload published : {payload}");
     }
 
+    /// <summary>
+    /// Publish all RoverAction at one
+    /// </summary>
+    private void PublishRoverActionListAll()
+    {
+        string payload = JsonUtility.ToJson(GenerateRoverAction.actionList);
+        client.Publish(publishTopic, System.Text.Encoding.UTF8.GetBytes(payload));
+        Debug.Log("Rover Action published");
+        Debug.Log($"payload published : {payload}");
+    }
+
+    private void PublishRoverActionFine()
+    {
+        if (publishActionListFineCoroutine != null) StopCoroutine(publishActionListFineCoroutine);
+        publishActionListFineCoroutine = StartCoroutine(PublishRoverActionListFine(GenerateRoverAction.actionList));
+    }
+
+    /// <summary>
+    /// Publish RoverActionList 1 action at a time
+    /// </summary>
+    /// <param name="actionList"></param>
+    /// <returns></returns>
     private IEnumerator PublishRoverActionListFine(RoverActionList actionList)
     {
         List<RoverAction> roverActionList = actionList.actions;

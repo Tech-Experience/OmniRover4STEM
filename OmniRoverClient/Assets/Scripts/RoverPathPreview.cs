@@ -76,7 +76,8 @@ public class RoverPathPreview : MonoBehaviour
 
         yield return Countdown(time, () =>
         {
-            rover.position += (Vector3)(currentSpeed * Time.deltaTime * Vector2.up);
+            Vector3 worldDir = rover.TransformDirection(Vector2.up);
+            rover.position += currentSpeed * Time.deltaTime * worldDir;
         });
         
     }
@@ -85,7 +86,8 @@ public class RoverPathPreview : MonoBehaviour
     {
         yield return Countdown(time, () =>
         {
-            rover.position += (Vector3)(currentSpeed * Time.deltaTime * Vector2.down);
+            Vector3 worldDir = rover.TransformDirection(Vector2.down);
+            rover.localPosition+= currentSpeed * Time.deltaTime * worldDir;
         });
     }
 
@@ -93,7 +95,8 @@ public class RoverPathPreview : MonoBehaviour
     {
         yield return Countdown(time, () =>
         {
-            rover.position += (Vector3)(currentSpeed * Time.deltaTime * Vector2.right);
+            Vector3 worldDir = rover.TransformDirection(Vector2.right);
+            rover.position += currentSpeed * Time.deltaTime * worldDir;
         });
     }
 
@@ -101,7 +104,8 @@ public class RoverPathPreview : MonoBehaviour
     {
         yield return Countdown(time, () =>
         {
-            rover.position += (Vector3)(currentSpeed * Time.deltaTime * Vector2.left);
+            Vector3 worldDir = rover.TransformDirection(Vector2.left);
+            rover.position += (Vector3)(currentSpeed * Time.deltaTime * worldDir);
         });
     }
 
@@ -111,7 +115,8 @@ public class RoverPathPreview : MonoBehaviour
 
         yield return Countdown(time, () =>
         {
-            rover.position += (Vector3)(currentSpeed * Time.deltaTime * direction.normalized);
+            Vector3 worldDir = rover.TransformDirection(direction);
+            rover.position += currentSpeed * Time.deltaTime * worldDir;
         });
     }
 
@@ -121,7 +126,8 @@ public class RoverPathPreview : MonoBehaviour
 
         yield return Countdown(time, () =>
         {
-            rover.position += (Vector3)(currentSpeed * Time.deltaTime * direction.normalized);
+            Vector3 worldDir = rover.TransformDirection(direction);
+            rover.position += currentSpeed * Time.deltaTime * worldDir;
         });
     }
 
@@ -131,7 +137,8 @@ public class RoverPathPreview : MonoBehaviour
 
         yield return Countdown(time, () =>
         {
-            rover.position += (Vector3)(currentSpeed * Time.deltaTime * direction.normalized);
+            Vector3 worldDir = rover.TransformDirection(direction);
+            rover.position += currentSpeed * Time.deltaTime * worldDir;
         });
     }
 
@@ -141,7 +148,8 @@ public class RoverPathPreview : MonoBehaviour
 
         yield return Countdown(time, () =>
         {
-            rover.position += (Vector3)(currentSpeed * Time.deltaTime * direction.normalized);
+            Vector3 worldDir = rover.TransformDirection(direction);
+            rover.position += currentSpeed * Time.deltaTime * worldDir;
         });
     }
 
@@ -176,7 +184,7 @@ public class RoverPathPreview : MonoBehaviour
     {        
         while (time > 0)     //While the time is more than zero...
         {
-            rover.Rotate(direction, Time.deltaTime * currentSpeed * 30);
+            rover.Rotate(direction, Time.deltaTime * currentSpeed * 90);
             time -= Time.deltaTime;
             yield return null;
         }
