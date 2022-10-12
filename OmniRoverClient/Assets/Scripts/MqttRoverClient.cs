@@ -6,17 +6,17 @@ using UnityEngine;
 public class MqttRoverClient : M2MqttUnityClient
 {
     [SerializeField]
-    private string publishTopic;
+    private MqttTopic publishTopic;
     public string PublishTopic
     {
-        get => publishTopic;
+        get => publishTopic.topic;
     }
 
     private Coroutine publishActionListFineCoroutine;
     public void PublishRoverActionList()
     {
-        //PublishRoverActionListAll();
-        PublishRoverActionFine();
+        PublishRoverActionListAll();
+        //PublishRoverActionFine();
     }
 
 
@@ -29,7 +29,7 @@ public class MqttRoverClient : M2MqttUnityClient
         string payload = JsonUtility.ToJson(actionList);
 
         if (publishActionListFineCoroutine != null) StopCoroutine(publishActionListFineCoroutine);
-        PublishPayload(payload, publishTopic);
+        PublishPayload(payload, PublishTopic);
     }
 
     /// <summary>
@@ -38,9 +38,7 @@ public class MqttRoverClient : M2MqttUnityClient
     private void PublishRoverActionListAll()
     {
         string payload = JsonUtility.ToJson(GenerateRoverAction.actionList);
-        client.Publish(publishTopic, System.Text.Encoding.UTF8.GetBytes(payload));
-        Debug.Log("Rover Action published");
-        Debug.Log($"payload published : {payload}");
+        PublishPayload(payload, PublishTopic);
     }
 
     private void PublishRoverActionFine()
@@ -68,7 +66,7 @@ public class MqttRoverClient : M2MqttUnityClient
         foreach(RoverActionList list in fineActionList)
         {
             string payload = JsonUtility.ToJson(list);
-            PublishPayload(payload, publishTopic);
+            PublishPayload(payload, PublishTopic);
             if (list.actions[0].action == "set_speed") continue;
             yield return new WaitForSeconds(list.actions[0].value);
         }
@@ -78,6 +76,6 @@ public class MqttRoverClient : M2MqttUnityClient
     {
         client.Publish(topic, System.Text.Encoding.UTF8.GetBytes(payload));
         Debug.Log("Rover Action published");
-        Debug.Log($"payload published : {payload}");
+        Debug.Log($"topic: {topic}, payload published : {payload}");
     }
 }

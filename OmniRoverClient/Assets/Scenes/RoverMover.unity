@@ -490,7 +490,7 @@ RectTransform:
   - {fileID: 1216126623}
   - {fileID: 1624710934}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -550,7 +550,7 @@ MonoBehaviour:
   autoConnect: 1
   mqttUserName: 
   mqttPassword: 
-  publishTopic: RoverAction/rover0
+  publishTopic: {fileID: 11400000, guid: 9d6daa6c07575844ea0df5e8ae60fe73, type: 2}
 --- !u!1 &245828493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,7 +1038,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1149042977}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RoverPathPreview, Assembly-CSharp
         m_MethodName: PreviewPath
         m_Mode: 1
@@ -1088,6 +1088,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 572898227}
   m_CullTransparentMesh: 1
+--- !u!1 &778821529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 778821531}
+  - component: {fileID: 778821530}
+  m_Layer: 0
+  m_Name: PathReviewer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &778821530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778821529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97198386cf7cea14e9014f4f5096eb3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rover: {fileID: 245828495}
+  speedLevel1: 2
+  speedLevel2: 3
+  speedLevel3: 4
+--- !u!4 &778821531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778821529}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 80.475296, y: 85.09676, z: -1.0390502}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1149042974
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,7 +1146,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1149042976}
   - component: {fileID: 1149042975}
-  - component: {fileID: 1149042977}
   m_Layer: 0
   m_Name: RoverSandBox
   m_TagString: Untagged
@@ -1133,22 +1180,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1149042977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1149042974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97198386cf7cea14e9014f4f5096eb3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rover: {fileID: 245828495}
-  speedLevel1: 2
-  speedLevel2: 3
-  speedLevel3: 4
 --- !u!1 &1216126622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1482,7 +1513,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ExecuteRoverAction
+  m_text: Execute Rover Action
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1655,7 +1686,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1149042977}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RoverPathPreview, Assembly-CSharp
         m_MethodName: StopRoverPreview
         m_Mode: 1
@@ -1799,7 +1830,7 @@ RectTransform:
   m_Children:
   - {fileID: 1474704452}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
