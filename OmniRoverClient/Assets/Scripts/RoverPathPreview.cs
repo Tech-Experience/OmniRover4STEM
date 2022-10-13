@@ -9,6 +9,7 @@ public class RoverPathPreview : MonoBehaviour
     public Transform rover;
 
     private Vector3 originalPosition;
+    private Quaternion originalRotation;
 
     [SerializeField]
     private float speedLevel1 = 1;
@@ -24,6 +25,7 @@ public class RoverPathPreview : MonoBehaviour
     public void Start()
     {
         originalPosition = rover.position;
+        originalRotation = rover.rotation;
 
         dispatch.Add("move_forward", MoveNorth);
         dispatch.Add("move_backward", MoveSouth);
@@ -50,6 +52,7 @@ public class RoverPathPreview : MonoBehaviour
         string json = JsonUtility.ToJson(GenerateRoverAction.actionList);
         RoverActionList actionList = JsonUtility.FromJson<RoverActionList>(json);
 
+        rover.rotation = originalRotation;
         rover.position = originalPosition;
         if (previewPathCoroutine != null) StopCoroutine(previewPathCoroutine);
         previewPathCoroutine = StartCoroutine(StartPath(actionList));

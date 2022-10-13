@@ -550,7 +550,7 @@ MonoBehaviour:
   autoConnect: 1
   mqttUserName: 
   mqttPassword: 
-  publishTopic: {fileID: 11400000, guid: 9d6daa6c07575844ea0df5e8ae60fe73, type: 2}
+  publishTopic: {fileID: 11400000, guid: b5e5b70e68b6b84439b0fc43ca89b2ac, type: 2}
 --- !u!1 &245828493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,7 +1038,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 778821530}
         m_TargetAssemblyTypeName: RoverPathPreview, Assembly-CSharp
         m_MethodName: PreviewPath
         m_Mode: 1
