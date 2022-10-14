@@ -37,6 +37,7 @@ public class MqttRoverClient : M2MqttUnityClient
     /// </summary>
     private void PublishRoverActionListAll()
     {
+        GenerateRoverAction.SetSpeed(GenerateRoverAction.SpeedLevel.Two); // reset speed at the end
         string payload = JsonUtility.ToJson(GenerateRoverAction.actionList);
         PublishPayload(payload, PublishTopic);
     }
