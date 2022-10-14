@@ -5,6 +5,7 @@ using UnityEngine;
 public static class GenerateRoverAction
 {
     public static RoverActionList actionList = new RoverActionList();
+    public const float MAX_TIME = 5f;
     public enum SpeedLevel
     {
         One,
@@ -77,8 +78,26 @@ public static class GenerateRoverAction
         CreateAction("stop", time);
     }
 
+    public static void MoveSquare(float size)
+    {
+        MoveForward(size);
+        MoveRight(size);
+        MoveBackward(size);
+        MoveLeft(size);
+    }
+
+    public static void MoveCircle(int iteration)
+    {
+        for (int i = 0; i < iteration; i++)
+        {
+            MoveForward(0.2f);
+            RotateRight(0.2f);
+        }
+    }
+
     private static void CreateAction(string action, float value)
     {
+        value = Mathf.Min(value, MAX_TIME);
         RoverAction roverAction = new RoverAction() { action = action, value = value };
         actionList.actions.Add(roverAction);
     }
