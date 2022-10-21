@@ -7,6 +7,9 @@ public class RoverSandBox : MonoBehaviour
     void Start()
     {
         MoveRoverMystery();
+        //Challenge1();
+        //Challenge2();
+        //Challenge3();
     }
 
     private void MoveRoverMystery()
@@ -17,4 +20,17 @@ public class RoverSandBox : MonoBehaviour
         MoveLeft(1);
     }
 
+    public void Challenge1()
+    {
+        // Your answer
+    }
+
+    public void Challenge2()
+    {
+        // Your answer
+    }
+    public void Challenge3()
+    {
+        // Your answer
+    }
 }
