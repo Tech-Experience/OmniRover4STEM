@@ -7,30 +7,14 @@ public class RoverSandBox : MonoBehaviour
     void Start()
     {
         MoveRoverMystery();
-        //Challenge1();
-        //Challenge2();
-        //Challenge3();
     }
     
+    // Mystery function. Try running it!
     private void MoveRoverMystery()
     {
         MoveForward(1);
         MoveRight(1);
         MoveBackward(1);
         MoveLeft(1);
-    }
-
-    public void Challenge1()
-    {
-        // Your answer
-    }
-
-    public void Challenge2()
-    {
-        // Your answer
-    }
-    public void Challenge3()
-    {
-        // Your answer
     }
 }
