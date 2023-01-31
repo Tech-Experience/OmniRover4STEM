@@ -1,17 +1,26 @@
 using M2MqttUnity;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MqttRoverClient : M2MqttUnityClient
 {
-    [SerializeField]
-    private MqttTopic publishTopic;
+    [SerializeField] private MqttTopic publishTopic;
     public string PublishTopic
     {
         get => publishTopic.topic;
     }
 
+    [SerializeField] private TMP_Text roverIDText;
+
+    private void OnValidate()
+    {
+        if(roverIDText != null && publishTopic != null)
+        {
+            roverIDText.text = publishTopic.name;
+        }
+    }
     private Coroutine publishActionListFineCoroutine;
     public void PublishRoverActionList()
     {
