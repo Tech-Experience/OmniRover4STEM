@@ -39,6 +39,7 @@ public class RoverPathPreview : MonoBehaviour
         dispatch.Add("rotate_right", RotateRight);
         dispatch.Add("set_speed", SetSpeed);
         dispatch.Add("stop", StopRover);
+        dispatch.Add("wait", StopRover);
         currentSpeed = speedLevel1;
     }
 

@@ -78,12 +78,25 @@ public static class GenerateRoverAction
         CreateAction("stop", time);
     }
 
+    public static void Wait(float time)
+    {
+        CreateAction("wait", time);
+    }
+
     public static void MoveSquare(float size)
     {
         MoveForward(size);
         MoveRight(size);
         MoveBackward(size);
         MoveLeft(size);
+    }
+
+    public static void ChangeColor(byte red, byte green, byte blue)
+    {
+        CreateAction("color_init", 99);
+        CreateAction("color_change", red);
+        CreateAction("color_change", green);
+        CreateAction("color_change", blue);
     }
 
     public static void MoveCircle(int iteration, float foward = 0.2f, float rotate = 0.2f)
@@ -97,7 +110,7 @@ public static class GenerateRoverAction
 
     private static void CreateAction(string action, float value)
     {
-        value = Mathf.Min(value, MAX_TIME);
+        //value = Mathf.Min(value, MAX_TIME);
         RoverAction roverAction = new RoverAction() { action = action, value = value };
         actionList.actions.Add(roverAction);
     }
