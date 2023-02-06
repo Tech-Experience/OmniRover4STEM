@@ -40,6 +40,8 @@ public class RoverPathPreview : MonoBehaviour
         dispatch.Add("set_speed", SetSpeed);
         dispatch.Add("stop", StopRover);
         dispatch.Add("wait", StopRover);
+        dispatch.Add("color_init", ColorInit);
+        dispatch.Add("color_change", ColorChange);
         currentSpeed = speedLevel1;
     }
 
@@ -57,6 +59,46 @@ public class RoverPathPreview : MonoBehaviour
         rover.position = originalPosition;
         if (previewPathCoroutine != null) StopCoroutine(previewPathCoroutine);
         previewPathCoroutine = StartCoroutine(StartPath(actionList));
+    }
+
+    private bool colorChangeInit;
+    private int rgbCounter;
+    private Color currentColor = new Color();
+    private IEnumerator ColorInit(float arg)
+    {
+        if (arg != GenerateRoverAction.COLOR_CHANGE_FLAG) return null;
+        colorChangeInit = true;
+        return null;
+    }
+
+    private IEnumerator ColorChange(float value)
+    {
+        if (!colorChangeInit) return null;
+        currentColor.a = 1;
+        float newValue = value / byte.MaxValue;
+        if(rgbCounter == 0)
+        {
+            currentColor.r = newValue;
+        } 
+        else if (rgbCounter == 1)
+        {
+            currentColor.g = newValue;
+        } 
+        else if (rgbCounter == 2)
+        {
+            currentColor.b = newValue;
+            colorChangeInit = false;
+            rgbCounter = 0;
+            
+            rover.gameObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", currentColor);
+            return null;
+        } 
+        else
+        {
+            throw new Exception("Invalid color counter");
+        }
+        rgbCounter++;
+        return null;
     }
 
     private IEnumerator StartPath(RoverActionList actionList)
