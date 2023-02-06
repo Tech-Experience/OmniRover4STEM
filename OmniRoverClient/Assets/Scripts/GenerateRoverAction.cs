@@ -6,6 +6,7 @@ public static class GenerateRoverAction
 {
     public static RoverActionList actionList = new RoverActionList();
     public const float MAX_TIME = 10f;
+    public const int COLOR_CHANGE_FLAG = 99;
     public enum SpeedLevel
     {
         One,
@@ -93,7 +94,7 @@ public static class GenerateRoverAction
 
     public static void ChangeColor(byte red, byte green, byte blue)
     {
-        CreateAction("color_init", 99);
+        CreateAction("color_init", COLOR_CHANGE_FLAG);
         CreateAction("color_change", red);
         CreateAction("color_change", green);
         CreateAction("color_change", blue);
