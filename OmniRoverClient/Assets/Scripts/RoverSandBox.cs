@@ -1,18 +1,12 @@
 using UnityEngine;
 using static GenerateRoverAction;
 
-public class RoverSandBox : MonoBehaviour
+public class RoverSandBox : SandBoxBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        MoveRoverMystery();
-    }
-    
     // Mystery function. Try running it!
-    private void MoveRoverMystery()
+    public void MoveSandBox()
     {
-        MoveForward(1);
+        MoveBackward(2);
         MoveRight(1);
         MoveBackward(1);
         MoveLeft(1);
