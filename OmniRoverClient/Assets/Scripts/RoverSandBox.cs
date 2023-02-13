@@ -6,7 +6,7 @@ public class RoverSandBox : SandBoxBase
     // Mystery function. Try running it!
     public void MoveSandBox()
     {
-        MoveBackward(2);
+        MoveForward(1);
         MoveRight(1);
         MoveBackward(1);
         MoveLeft(1);
